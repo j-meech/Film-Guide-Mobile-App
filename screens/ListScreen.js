@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {
 	
 } from 'react-native';
-//import films from "../resources/films.json";
 import List from "../components/List";
 import { connect } from "react-redux";
+
+import { getFilms } from "../data/api";
 
 
 
@@ -13,6 +14,10 @@ class ListScreen extends Component {
 		super(props);
 		this.onPress = this.onPress.bind(this);	
 	}
+
+	componentDidMount() {
+        this.props.onLoad();
+    }
 
 	onPress(item) {
 		this.props.navigation.navigate("Detail", {
@@ -40,5 +45,11 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ListScreen);
+const mapDispatchToProps = dispatch => {
+    return {
+        onLoad: () => dispatch(getFilms()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListScreen);
 
