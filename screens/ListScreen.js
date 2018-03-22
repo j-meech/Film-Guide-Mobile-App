@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
 	
 } from 'react-native';
-import films from "../resources/films.json";
+//import films from "../resources/films.json";
 import List from "../components/List";
+import { connect } from "react-redux";
 
 
 
@@ -22,7 +23,7 @@ class ListScreen extends Component {
 	render() {
 		return (
 			<List
-				item={films}
+				item={this.props.films}
 				onPress={this.onPress}
 			/>
 		);
@@ -33,5 +34,11 @@ ListScreen.navigationOptions = {
 	title: 'Films on Freeview',
 };
 
+const mapStateToProps = state => {
+    return {
+        films: state.films
+    };
+};
 
-export default ListScreen;
+export default connect(mapStateToProps)(ListScreen);
+

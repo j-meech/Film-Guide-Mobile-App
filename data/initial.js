@@ -1,5 +1,7 @@
 import films from "../resources/films.json";
 
-const initial = films;
+const initial = {
+	films: films
+};
 
 export default initial;

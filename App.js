@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import ListScreen from "./screens/ListScreen";
@@ -5,6 +6,7 @@ import DetailScreen from "./screens/DetailScreen";
 import { createStore } from "redux";
 import initial from "./data/initial";
 import reducer from "./data/reducer";
+import { Provider } from "react-redux";
 
 
 StatusBar.setBarStyle('light-content');
@@ -26,4 +28,10 @@ const store = createStore(
     initial,
 );
 
-export default RootNavigator;
+const App = () => (
+	<Provider store={store}>
+		<RootNavigator />
+	</Provider>
+);
+
+export default App;
