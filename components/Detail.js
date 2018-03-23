@@ -24,8 +24,8 @@ class DetailScreen extends Component {
 			uri: `https://image.tmdb.org/t/p/original/${item.tmdbImageId}.jpg`
 		}
 		return (
-			<View style={styles.filmDetailsContainer}>
-				<ScrollView>
+			<ScrollView>
+				<View style={styles.filmDetailsContainer}>
 					{ item.tmdbImageId ?
 						<Image source={ source } style={styles.filmImage} />
 						: null
@@ -52,8 +52,8 @@ class DetailScreen extends Component {
 					<Text style={styles.filmSynopsisText}>
 						{item.synopsis}
 					</Text>
-				</ScrollView>
-			</View>
+				</View>
+			</ScrollView>
 		);
 	}
 }

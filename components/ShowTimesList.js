@@ -6,7 +6,7 @@ import {
 import moment from 'moment';
 import ShowTime from "./ShowTime";
 
-class ShowTime extends Component {
+class ShowTimesList extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -22,7 +22,8 @@ class ShowTime extends Component {
 					i={index}
 					showtimes={showtimes}
 					numberOfLines={numberOfLines} />
-				);
+				)
+		);
 	}
 }
 
@@ -35,7 +36,7 @@ class ShowTime extends Component {
 // });
 
 
-export default ShowTime;
+export default ShowTimesList;
 
 
 // render() {
