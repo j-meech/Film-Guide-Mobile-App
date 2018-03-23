@@ -26,6 +26,7 @@ class ListItem extends Component {
 
 	render() {		
 		const { item } = this.props;
+		
 		return (
 			<TouchableHighlight 
 				style={styles.listItem} 

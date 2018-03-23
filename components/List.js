@@ -3,9 +3,11 @@ import {
 	StyleSheet,
 	View,
 	FlatList,
+	RefreshControl,
 } from 'react-native';
 import ListItem from "../components/ListItem";
 import films from "../resources/films.json";
+import moment from 'moment';
 
 
 class ListScreen extends Component {
@@ -33,12 +35,21 @@ class ListScreen extends Component {
 	}
 
 	render() {
+		const { item } = this.props;
+		const now = moment().format("HH:mm").replace(/:/g, "");
+		const filteredItem = item.filter(i => (+(i.showtimes[0].startsAtTime).replace(/:/g, "") > +now))
 		return (
 			<FlatList
-				data={this.props.item}
+				data={filteredItem}
 				renderItem={this.renderItem}
 				keyExtractor={this.keyExtractor}
 				ItemSeparatorComponent={this.renderSeparator}
+				refreshControl={
+					<RefreshControl
+		            refreshing={this.props.refreshing}
+		            onRefresh={this.props.onRefresh}
+		          />
+				}
 			/>
 		);
 	}

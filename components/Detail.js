@@ -24,7 +24,7 @@ class DetailScreen extends Component {
 			uri: `https://image.tmdb.org/t/p/original/${item.tmdbImageId}.jpg`
 		}
 		return (
-			<ScrollView>
+			<ScrollView style={styles.scrollView}>
 				<View style={styles.filmDetailsContainer}>
 					{ item.tmdbImageId ?
 						<Image source={ source } style={styles.filmImage} />
@@ -58,8 +58,6 @@ class DetailScreen extends Component {
 	}
 }
 
-//<ShowTime showTime={ item.showtimes[0].startsAtTime } showDate={ item.showtimes[0].startsAtDate } channel={ item.showtimes[0].channel }/>
-
 DetailScreen.navigationOptions = ( { navigation } ) => ({
   title: navigation.state.params.item.name,
   headerRight: (
@@ -70,13 +68,13 @@ DetailScreen.navigationOptions = ( { navigation } ) => ({
 const styles = StyleSheet.create({
 	filmDetailsContainer: {
 		flex: 1,
+		paddingVertical: 10,
 		paddingHorizontal: 20,
 		backgroundColor: '#fff',
 	},
 	filmImage: {
 		height: 300,
 		width:200,
-		marginTop: 10,
 		marginBottom: 10,
 		alignSelf: 'center',
 	},

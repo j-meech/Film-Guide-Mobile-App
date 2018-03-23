@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import {
-	
-} from 'react-native';
 import List from "../components/List";
 import { connect } from "react-redux";
-
-import { getFilms } from "../data/api";
+import { getFilms, refreshFilmsApi } from "../data/api";
 
 
 
@@ -13,6 +9,15 @@ class ListScreen extends Component {
 	constructor(props) {
 		super(props);
 		this.onPress = this.onPress.bind(this);	
+		this._onRefresh = this._onRefresh.bind(this);
+	}
+
+	_onRefresh() {
+		this.props.onRefresh();
+		// this.setState({refreshing: true});
+		// fetchData().then(() => {
+		//   this.setState({refreshing: false});
+		// });
 	}
 
 	componentDidMount() {
@@ -29,7 +34,9 @@ class ListScreen extends Component {
 		return (
 			<List
 				item={this.props.films}
-				onPress={this.onPress}
+				onPress={this.onPress}	
+				refreshing={this.props.refreshing}
+				onRefresh={this._onRefresh}
 			/>
 		);
 	}
@@ -41,13 +48,15 @@ ListScreen.navigationOptions = {
 
 const mapStateToProps = state => {
     return {
-        films: state.films
+        films: state.films,
+        refreshing: state.refreshing,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onLoad: () => dispatch(getFilms()),
+        onRefresh: () => dispatch(refreshFilmsApi()),
     };
 };
 
