@@ -1,7 +1,13 @@
 
-// need to change state.set() as not using immutable, use spred instead
+// need to change state.set() as not using immutable, use spread instead
 
-const setFilms = (state, { films }) => state.set("films", films);
+const setFilms = (state, { films }) => {
+	const newState = {
+		...state,
+		films: films,
+	}
+	return newState;
+};
 
 const reducer = (state, action) => {
     switch (action.type) {

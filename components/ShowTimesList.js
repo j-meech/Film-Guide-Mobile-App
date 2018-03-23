@@ -4,6 +4,7 @@ import {
   Text,
 } from 'react-native';
 import moment from 'moment';
+import ShowTime from "./ShowTime";
 
 class ShowTime extends Component {
 	constructor(props) {
@@ -12,22 +13,26 @@ class ShowTime extends Component {
 
 	render() {
 		
-		const {showtimes, numberOfLines, i} = this.props;
-		const showing = showtimes[i].startsAtDate + " " + showtimes[i].startsAtTime;
+		const {showtimes, numberOfLines} = this.props;
 
 		return (
-				<Text style={styles.filmShowTime} numberOfLines={numberOfLines}>{ moment(showing).calendar() } on { showtimes[i].channel } </Text>
-		);
+				showtimes.reverse().map((showtime, index) => 
+				<ShowTime 	
+					key={index} 
+					i={index}
+					showtimes={showtimes}
+					numberOfLines={numberOfLines} />
+				);
 	}
 }
 
-const styles = StyleSheet.create({
-	filmShowTime: {
-		fontSize: 15,
-		color: '#878787',
-		marginVertical: 3,
-	},
-});
+// const styles = StyleSheet.create({
+// 	filmShowTime: {
+// 		fontSize: 15,
+// 		color: '#878787',
+// 		marginVertical: 3,
+// 	},
+// });
 
 
 export default ShowTime;

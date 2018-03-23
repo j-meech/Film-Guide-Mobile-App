@@ -7,7 +7,9 @@ import {
 	Image,
 	ScrollView,
 } from 'react-native';
-import ShowTime from "../components/ShowTime";
+import ShowTimesList from "./ShowTimesList";
+import Rating from "./Rating";
+
 
 
 class DetailScreen extends Component {
@@ -24,19 +26,28 @@ class DetailScreen extends Component {
 		return (
 			<View style={styles.filmDetailsContainer}>
 				<ScrollView>
-					<Image source={ source } style={styles.filmImage} />
+					{ item.tmdbImageId ?
+						<Image source={ source } style={styles.filmImage} />
+						: null
+					}
 					<View style={styles.filmReleaseRatingContainer}>
-						<Text style={styles.filmDetailsText}>
-							Released in {item.year}
-						</Text>
-						<Text style={styles.filmDetailsText}>
-							Rating: {item.tmdbRating}%
-						</Text>
+						{ item.year ?
+							<Text style={styles.filmDetailsText}>
+								Released in {item.year}
+							</Text>
+							: null
+						}
+						{ item.tmdbRating ? 
+							<Text style={styles.filmDetailsText}>
+								Rating: <Rating rating={item.tmdbRating}/>
+							</Text>
+							: null
+						}
 					</View>
 					<Text style={styles.filmDetailsText}>
 						Showtimes:
 					</Text>
-					<ShowTime showtime={ item.showtimes[0].startsAtTime } channel={ item.showtimes[0].channel }/>
+					<ShowTimesList showtimes={item.showtimes} />
 					<View style={styles.detailsDivider}></View>
 					<Text style={styles.filmSynopsisText}>
 						{item.synopsis}
@@ -47,6 +58,7 @@ class DetailScreen extends Component {
 	}
 }
 
+//<ShowTime showTime={ item.showtimes[0].startsAtTime } showDate={ item.showtimes[0].startsAtDate } channel={ item.showtimes[0].channel }/>
 
 DetailScreen.navigationOptions = ( { navigation } ) => ({
   title: navigation.state.params.item.name,

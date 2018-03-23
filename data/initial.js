@@ -1,7 +1,7 @@
 import films from "../resources/films.json";
 
 const initial = {
-	films: films
+	films: [],
 };
 
 export default initial;

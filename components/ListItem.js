@@ -8,6 +8,7 @@ import {
 import { Entypo } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 import ShowTime from "../components/ShowTime";
+import Rating from "./Rating";
 
 const isIOS = Platform.OS === 'ios';
 
@@ -25,7 +26,6 @@ class ListItem extends Component {
 
 	render() {		
 		const { item } = this.props;
-
 		return (
 			<TouchableHighlight 
 				style={styles.listItem} 
@@ -34,10 +34,14 @@ class ListItem extends Component {
 				<View style={styles.container}>					
 					<View style={styles.listItemText}>
 						<Text style={styles.filmTitle} numberOfLines={1}>{ item.name }</Text>
-						<ShowTime showtime={ item.showtimes[0].startsAtTime } channel={ item.showtimes[0].channel }/>
+						<ShowTime showtimes={item.showtimes} numberOfLines={1} i={0}/>
 					</View>	
 					<View style={styles.ratingContainer}>
-						<Text>{item.tmdbRating}%</Text>
+						{ isIOS ? 
+							<Entypo name="chevron-right" size={25} color="#e4e4e4"/>
+							: null
+						}
+						<Rating rating={item.tmdbRating}/>
 					</View>
 				</View>	
 			
@@ -61,15 +65,12 @@ const styles = StyleSheet.create({
 	},
 	listItemText: {
 		flexDirection: 'column',
+		width: 240,
 	},
 	filmTitle: {
 		fontSize: 18,
 		marginTop: 4,
 	},
-	// filmShowTime: {
-	// 	fontSize: 12,
-	// 	color: '#ccc',
-	// },
 	ratingContainer: {
 		flex: 1,
 		flexDirection: 'row-reverse',
@@ -78,5 +79,3 @@ const styles = StyleSheet.create({
 
 
 export default ListItem;
-
-//<Text style={styles.filmShowTime}>{ item.showtimes[0].startsAtTime + " on " + item.showtimes[0].channel }</Text>
